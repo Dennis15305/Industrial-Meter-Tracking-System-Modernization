@@ -111,3 +111,7 @@ I insisted on correct twisted-pair routing for A/B signals according to RS-485 b
 RS-485 instability was caused by a combination of wiring, shielding and topology issues.
 
 System stability improved significantly after applying proper industrial communication practices.
+
+### Real-world constraint
+
+All changes had to be implemented without stopping production for long periods.
