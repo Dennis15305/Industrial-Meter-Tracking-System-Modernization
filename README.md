@@ -107,6 +107,20 @@ The RS-485 network was transformed from unstable to industrial-grade reliable co
 
 ---
 
+## Contribution Scope
+
+Some PLC logic already existed before my work.  
+My contribution focused on:
+
+- understanding and documenting the existing system
+- improving data quality during counter reset events
+- adding invalid value filtering
+- stabilizing RS-485 communication
+- improving system reliability
+- preparing the system for ERP / 1C integration
+
+---
+
 ## Notes
 
 This repository contains an anonymized version of the original system.
