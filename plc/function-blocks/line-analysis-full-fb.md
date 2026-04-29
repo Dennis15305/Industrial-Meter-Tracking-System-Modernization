@@ -63,3 +63,108 @@ Line stop is detected
 Status word is updated
         ↓
 History record is marked for transfer
+```
+
+Operator Command Handling
+
+The block receives HMI buttons as a word and decodes individual bits.
+
+Examples of commands:
+
+Stop
+Setup / new order
+No loading
+Planned maintenance
+Fault clearing
+Alarm
+Technology reason
+Lunch
+Web break
+
+Each command updates the line status and may create a new history record.
+
+History Recording
+
+History records are created when:
+
+line status changes
+new order/setup is selected
+shift boundary is reached
+special events occur
+
+Each history record contains:
+
+date and time
+order number
+shift number
+line status
+additional status flags
+user number
+production counter
+transfer flags
+Transfer Flags
+
+History records use flags such as:
+
+NotGet
+NotGet2
+NotGet3
+NotGet4
+
+These flags indicate that the record has not yet been transferred to upper-level systems.
+
+Simplified Pseudocode
+// Decode HMI buttons
+DecodeButtonWord(Buttons);
+
+// Decode current line status
+DecodeStatusWord(Line_StatusWord);
+
+// Detect production movement
+IF InputCounter increased THEN
+    Line_CurrentCounter := Line_CurrentCounter + Delta;
+    Line_GlobalCounter  := Line_GlobalCounter + Delta;
+
+    IF CurrentShift = Day THEN
+        DayCounter := DayCounter + Delta;
+    ELSE
+        NightCounter := NightCounter + Delta;
+    END_IF;
+END_IF;
+
+// Detect stop from sensor
+IF NoInputPulsesForConfiguredTime THEN
+    Line_StatusWord := STOP_FROM_SENSOR;
+    Line_InWork := FALSE;
+END_IF;
+
+// Handle operator commands
+IF StopButton THEN
+    Line_StatusWord := STOP;
+END_IF;
+
+IF SetupButton THEN
+    Line_StatusWord := SETUP;
+    Line_ZakazNumber := Line_ZakazNumber + 1;
+    Line_CurrentCounter := 0;
+    CreateHistoryRecord();
+END_IF;
+
+// If status changed, create history record
+IF PreviousStatus <> Line_StatusWord THEN
+    CountChangesState := CountChangesState + 1;
+    CreateHistoryRecord();
+END_IF;
+Engineering Value
+
+This function block represents the central business logic of the production line.
+
+It connects:
+
+physical sensor signals
+operator commands
+line state machine
+production counters
+alarms
+history recording
+SCADA / SQL transfer logic
