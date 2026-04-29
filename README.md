@@ -12,6 +12,17 @@ The system integrates:
 
 ---
 
+## Repository Structure
+
+- [PLC logic overview](plc/README.md)
+- [System documentation](docs/system-overview.md)
+- [Problem analysis](docs/problem-analysis.md)
+- [RS-485 diagnostics](docs/rs485-diagnostics.md)
+- [Modernization plan](docs/modernization-plan.md)
+- [Engineering lessons](docs/engineering-lessons.md)
+
+---
+
 ## My Role
 
 When I joined the project, the system was unstable and unreliable:
