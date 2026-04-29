@@ -6,3 +6,4 @@ This folder contains anonymized Structured Text examples from the PLC project.
 
 - `calc-delta-prg.st` — calls pulse duration analysis function blocks for input and output sensors.
 - `get-date-time-prg.st` — reads PLC system time, applies timezone offset and prepares date/time values.
+- `transfer-to-db-prg.st` — prepares historical records for SCADA / SQL transfer using a handshake flag.
