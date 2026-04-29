@@ -68,7 +68,7 @@ Cut point processing
 Prepared data for HMI / WinCC / SQL
 ```
 
-Notes
+##Notes
 
 The original logic is implemented in FBD inside EcoStruxure Machine Expert.
 
