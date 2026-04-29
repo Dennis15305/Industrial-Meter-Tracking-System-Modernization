@@ -115,6 +115,7 @@ NotGet4
 These flags indicate that the record has not yet been transferred to upper-level systems.
 
 ## Simplified Pseudocode
+```
 // Decode HMI buttons
 DecodeButtonWord(Buttons);
 
@@ -156,6 +157,7 @@ IF PreviousStatus <> Line_StatusWord THEN
     CountChangesState := CountChangesState + 1;
     CreateHistoryRecord();
 END_IF;
+```
 ## Engineering Value
 
 This function block represents the central business logic of the production line.
