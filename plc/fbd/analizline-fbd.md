@@ -68,6 +68,34 @@ Cut point processing
 Prepared data for HMI / WinCC / SQL
 ```
 
+// Simplified pseudocode, not exact original code
+
+ConnectionChecker();
+
+LineAnalyzer(
+    InputSensor := LineInputSensor,
+    OutputSensor := LineOutputSensor,
+    StatusWord := LineStatusWord,
+    History := LineHistory
+);
+
+FOR Channel := 1 TO 6 DO
+    ModbusReset[Channel](
+        Error := ModbusError[Channel],
+        ResetCommand := ResetCommand[Channel]
+    );
+END_FOR;
+
+FOR Roll := 1 TO 6 DO
+    CutPoint[Roll](
+        Meters := CounterValue[Roll],
+        Set := ResetSignal[Roll]
+    );
+END_FOR;
+
+ModbusErrorWord := PackBits(ModbusError);
+
+
 ## Notes
 
 The original logic is implemented in FBD inside EcoStruxure Machine Expert.
