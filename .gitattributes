@@ -1,2 +1,2 @@
-*.st linguist-language=IEC 61131-3
+*.st linguist-language=Pascal
 *.st linguist-detectable=true
