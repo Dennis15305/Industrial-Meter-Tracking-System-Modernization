@@ -65,25 +65,25 @@ Status word is updated
 History record is marked for transfer
 ```
 
-Operator Command Handling
+## Operator Command Handling
 
 The block receives HMI buttons as a word and decodes individual bits.
 
 Examples of commands:
 
-Stop
-Setup / new order
-No loading
-Planned maintenance
-Fault clearing
-Alarm
-Technology reason
-Lunch
-Web break
+- Stop
+- Setup / new order
+- No loading
+- Planned maintenance
+- Fault clearing
+- Alarm
+- Technology reason
+- Lunch
+- Web break
 
 Each command updates the line status and may create a new history record.
 
-History Recording
+## History Recording
 
 History records are created when:
 
@@ -94,26 +94,27 @@ special events occur
 
 Each history record contains:
 
-date and time
-order number
-shift number
-line status
-additional status flags
-user number
-production counter
-transfer flags
-Transfer Flags
+- date and time
+- order number
+- shift number
+- line status
+- additional status flags
+- user number
+- production counter
+- transfer flags
+
+## Transfer Flags
 
 History records use flags such as:
-
+```
 NotGet
 NotGet2
 NotGet3
 NotGet4
-
+```
 These flags indicate that the record has not yet been transferred to upper-level systems.
 
-Simplified Pseudocode
+## Simplified Pseudocode
 // Decode HMI buttons
 DecodeButtonWord(Buttons);
 
@@ -155,16 +156,16 @@ IF PreviousStatus <> Line_StatusWord THEN
     CountChangesState := CountChangesState + 1;
     CreateHistoryRecord();
 END_IF;
-Engineering Value
+## Engineering Value
 
 This function block represents the central business logic of the production line.
 
 It connects:
 
-physical sensor signals
-operator commands
-line state machine
-production counters
-alarms
-history recording
-SCADA / SQL transfer logic
+- physical sensor signals
+- operator commands
+- line state machine
+- production counters
+- alarms
+- history recording
+- SCADA / SQL transfer logic
