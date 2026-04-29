@@ -2,60 +2,79 @@
 
 ## Overview
 
-This project describes the modernization of an industrial meter tracking system used on a corrugated cardboard production line.
+This project describes the analysis, recovery and modernization of an industrial meter tracking system used on a corrugated cardboard production line.
 
-The system uses RS-485 / Modbus RTU counters, a Schneider Electric PLC, HMI, WinCC SCADA and SQL Server database to collect and store paper consumption and production length data.
+The system uses RS-485 / Modbus RTU counters, a PLC, HMI, WinCC SCADA and SQL Server to collect and process production data.
 
-## Initial State
+---
 
-When I joined the project, the system was already installed but worked unreliably. The counters often froze or stopped responding, the database contained noisy and duplicated values, and the RS-485 network was unstable.
+## My Role
 
-At the beginning, my experience was mainly limited to CoDeSys and Structured Text. I had to learn Schneider EcoStruxure Machine Expert, the existing PLC code, the HMI logic, WinCC data flow and SQL database integration.
+When I joined the project, the system was already installed but worked unreliably and required constant maintenance.
 
-## Problems Found
+I had to:
+- understand an undocumented system
+- learn new tools (Machine Expert, WinCC, SQL integration)
+- identify root causes of failures
+- restore system operation
+- improve reliability and data quality
 
-- Unstable RS-485 communication.
-- No common reference wire for Modbus devices.
-- Poor cable quality and inconsistent twisted-pair usage.
-- Shielding and grounding were not implemented correctly.
-- Counter reset events produced noisy database records.
-- Several values were written to the database even when only one clean production value was needed.
-- In 3-layer production mode, counters 4 and 5 were disconnected, which caused HMI errors and could affect RS-485 termination.
+---
 
-## What I Improved
+## Key Achievements
 
-- Studied the existing PLC, HMI, WinCC and SQL system.
-- Changed the database write logic to store one clean meter value instead of multiple noisy values.
-- Improved PLC logic around counter reset detection.
-- Diagnosed RS-485 as the main cause of long-term counter failures.
-- Replaced the communication cable with a shielded twisted-pair RS-485 cable.
-- Defended the requirement that A/B signals must be routed through the same twisted pair.
-- Improved system stability after rewiring.
-- Started hardware investigation of the counters to add a proper reference point for RS-485.
-- Planned relay-based switching between 3-layer and 5-layer production modes.
+- Restored a non-working production line
+- Fixed incorrect data handling during counter reset events
+- Eliminated noisy and duplicated database records
+- Stabilized RS-485 communication
+- Replaced communication cable with proper shielded twisted pair
+- Ensured correct differential signal routing (A/B)
+- Achieved stable operation without daily failures
+- Improved system reliability under real production conditions
 
-## System Architecture
+---
 
-Encoder / Measuring Wheel  
-→ Counter  
-→ RS-485 / Modbus RTU  
-→ Schneider PLC  
-→ HMI / WinCC  
-→ SQL Server  
-→ Production reports / 1C integration
+## Technical Highlights
 
-## Current Status
+- PLC programming (Structured Text)
+- Modbus RTU communication
+- RS-485 diagnostics and troubleshooting
+- Industrial data processing
+- SQL database integration
+- SCADA (WinCC)
+- System-level debugging (hardware + software)
 
-The line is currently working more reliably after cable replacement. Further work is planned on RS-485 reference wiring, grounding, counter verification and automatic 3-layer / 5-layer bus switching.
+---
 
-## Technologies
+## Documentation
 
-- Schneider Electric M241 PLC
-- EcoStruxure Machine Expert
-- Structured Text
-- Modbus RTU
-- RS-485
-- Weintek HMI / EBPro
-- Siemens WinCC
-- SQL Server
-- Industrial diagnostics
+- [System Overview](docs/system-overview.md)
+- [Problem Analysis](docs/problem-analysis.md)
+- [RS-485 Diagnostics](docs/rs485-diagnostics.md)
+- [Modernization Plan](docs/modernization-plan.md)
+
+---
+
+## Project Context
+
+- Real industrial production environment
+- Limited downtime for testing
+- No complete documentation available
+- Required reverse engineering and on-site diagnostics
+
+---
+
+## Status
+
+System is currently operating reliably after implemented improvements.
+
+Further enhancements are planned:
+- RS-485 reference implementation
+- counter verification
+- dynamic bus topology switching (3-layer / 5-layer modes)
+
+---
+
+## Author
+
+Industrial Automation Engineer focused on PLC systems, industrial communication and system reliability.
