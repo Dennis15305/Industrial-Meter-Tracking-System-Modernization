@@ -56,3 +56,22 @@ The system uses handshake flags:
 2 = server confirmed that data was read
 ```
 
+## History Array
+
+The system stores line events in an array of History structures.
+
+Each record contains:
+
+- timestamp
+- shift number
+- order number
+- counters
+- status words
+- user number
+- setup type
+- transfer flags
+## Notes
+
+This repository contains an anonymized representation of the original GVL.
+
+Real memory addresses, internal names and plant-specific identifiers were removed.
