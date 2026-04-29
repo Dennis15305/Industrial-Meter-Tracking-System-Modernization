@@ -1,42 +1,12 @@
+# Industrial Meter Tracking System Modernization
+
 ## Overview
 
-This project describes the modernization of an industrial meter tracking system used on a corrugated cardboard production line.
+This repository describes the analysis, recovery and modernization of an industrial meter tracking system used on a corrugated cardboard production line.
 
-The system integrates:
+The system collects production length and counter data from industrial counters via RS-485 / Modbus RTU, processes it in a PLC, visualizes it through SCADA/HMI and prepares data for database storage and external reporting systems.
 
-- RS-485 / Modbus RTU counters
-- Schneider Electric PLC (M241)
-- WinCC SCADA
-- SQL Server database
-- ERP system (1C)
-
----
-
-## Repository Structure
-
-- [PLC logic overview](plc/README.md)
-- [System documentation](docs/system-overview.md)
-- [Problem analysis](docs/problem-analysis.md)
-- [RS-485 diagnostics](docs/rs485-diagnostics.md)
-- [Modernization plan](docs/modernization-plan.md)
-- [Engineering lessons](docs/engineering-lessons.md)
-
----
-
-## My Role
-
-When I joined the project, the system was unstable and unreliable:
-
-- counters frequently froze
-- RS-485 communication failed daily
-- database contained noisy and incorrect data
-
-I independently:
-
-- analyzed the entire system from PLC to database
-- fixed communication issues
-- redesigned data processing logic
-- improved system reliability and stability
+This is an anonymized portfolio case study based on a real industrial automation project.
 
 ---
 
@@ -44,85 +14,207 @@ I independently:
 
 ![System Architecture](diagrams/system-architecture.png)
 
+### Main data flow
+
+    Measuring wheels / counters
+            ↓
+    RS-485 / Modbus RTU
+            ↓
+    PLC logic
+            ↓
+    GVL / history buffer
+            ↓
+    WinCC SCADA
+            ↓
+    SQL Server
+            ↓
+    ERP / reporting system
+
 ---
 
-## RS-485 Network Improvement
+## My Role
 
-![RS-485 Improvement](diagrams/rs485-before-after.png)
+When I joined the project, the system already existed, but it worked unreliably and required constant attention.
 
-### Result
+My work focused on understanding, recovering and improving the system.
 
-The RS-485 network was transformed from unstable to industrial-grade reliable communication.
+I worked on:
 
-- stable operation without failures
-- no counter freezes
-- continuous operation > 7 days
+- analyzing the existing PLC, HMI, WinCC and SQL data flow
+- restoring operation of a non-working production line
+- diagnosing RS-485 / Modbus communication problems
+- improving counter data processing logic
+- reducing noisy and incorrect database records
+- improving communication reliability
+- documenting the system architecture and modernization process
+
+Some parts of the PLC logic already existed before my work.
+
+My contribution was focused on system analysis, troubleshooting, modernization, reliability improvement and documentation.
+
+---
+
+## Main Problems
+
+The original system had several reliability and data quality issues:
+
+- unstable RS-485 communication
+- counters freezing or disconnecting during production
+- incorrect or inconsistent wiring practices
+- no common RS-485 reference point
+- incomplete shielding and grounding strategy
+- missing or incorrect bus termination
+- noisy database records during counter reset events
+- multiple values written when only one valid production value was needed
+- limited documentation for the modified counters and existing PLC logic
 
 ---
 
 ## Key Improvements
 
-### 1. Data Processing
+### 1. RS-485 Communication Reliability
 
-- removed noisy and duplicate values
-- implemented reset detection logic (CutPoint)
-- filtered invalid counter values
-- ensured clean data for database
+The RS-485 network was one of the main sources of instability.
 
-### 2. PLC Logic
+Improvements included:
 
-- implemented modular function blocks:
-  - CutPoint
-  - CalcDeltaT
-  - MB_Reset
-- improved shift and state tracking
-- stabilized data transfer to SCADA
+- replacing old communication wiring with shielded twisted-pair cable
+- ensuring A/B RS-485 signals are routed through the same twisted pair
+- connecting the cable shield only on the PLC side
+- adding 120 Ω termination resistors at the correct bus endpoints
+- analyzing the need for a common reference point between counters
 
-### 3. Communication (RS-485)
+After these changes, the counter network works reliably without regular communication failures.
 
-- implemented proper twisted pair wiring
-- added shielding with correct grounding strategy
-- installed termination resistors (120 Ω)
-- diagnosed and fixed Modbus issues
+![RS-485 Improvement](diagrams/rs485-before-after.png)
+
+---
+
+### 2. Counter Data Processing
+
+The original logic produced noisy data during counter reset events.
+
+Improvements included:
+
+- detecting sudden counter value drops as reset events
+- capturing the last valid meter value before reset
+- filtering invalid overflow values
+- storing one clean production value instead of multiple noisy records
+- using buffer variables for transfer and diagnostics
+
+This improved the quality of data prepared for SCADA / SQL storage.
+
+---
+
+### 3. PLC Logic Understanding and Documentation
+
+The PLC project contains both Structured Text and Function Block Diagram logic.
+
+Documented logic includes:
+
+- shift detection and state tracking
+- counter reset detection
+- pulse duration analysis
+- Modbus recovery logic
+- PLC-to-database transfer handshake
+- global variables and history buffer structure
+- main production line analysis block
+
+---
+
+## Repository Structure
+
+    .
+    ├── diagrams/       # System architecture and RS-485 improvement diagrams
+    ├── docs/           # Project documentation and engineering analysis
+    ├── hmi/            # HMI-related notes and future documentation
+    ├── photos/         # Project-related photos and screenshots
+    ├── plc/            # PLC logic examples and documentation
+    ├── sql/            # SQL-related examples and future documentation
+    ├── wincc/          # WinCC-related notes and future documentation
+    ├── NOTICE.md       # Repository confidentiality notice
+    └── README.md
+
+---
+
+## Documentation
+
+- [System Overview](docs/system-overview.md)
+- [Problem Analysis](docs/problem-analysis.md)
+- [RS-485 Diagnostics](docs/rs485-diagnostics.md)
+- [Modernization Plan](docs/modernization-plan.md)
+- [Engineering Lessons](docs/engineering-lessons.md)
+- [PLC Logic Overview](plc/README.md)
+
+---
+
+## PLC Logic
+
+The PLC part of this repository contains anonymized examples and documentation for:
+
+- Structured Text programs
+- Function Blocks
+- FBD logic
+- Global variables
+- history buffer structure
+
+Important function blocks:
+
+- CutPoint — detects counter reset events and captures valid meter values
+- CalcDeltaT — measures digital sensor pulse duration
+- MB_Reset — handles Modbus communication recovery
+- Line_AnalizFul — main line state and production analysis block
+
+See: [PLC Logic Overview](plc/README.md)
 
 ---
 
 ## Technologies Used
 
-- PLC: Schneider Electric M241
-- Programming: Structured Text (ST), FBD
-- Protocol: Modbus RTU (RS-485)
-- SCADA: WinCC
-- Database: Microsoft SQL Server
-- Integration: ERP (1C)
+- Schneider Electric M241 PLC
+- EcoStruxure Machine Expert
+- Structured Text (ST)
+- Function Block Diagram (FBD)
+- RS-485
+- Modbus RTU
+- Weintek HMI / EBPro
+- Siemens WinCC
+- Microsoft SQL Server
+- ERP / 1C integration concept
 
 ---
 
-## Engineering Highlights
+## Current Status
 
-- full system analysis from hardware to database
-- real industrial troubleshooting (RS-485 instability)
-- implementation of fault-tolerant communication logic
-- development of reliable data processing pipeline
+The system is currently operating reliably after RS-485 wiring improvements and PLC logic corrections.
 
----
+Planned future improvements:
 
-## Contribution Scope
-
-Some PLC logic already existed before my work.  
-My contribution focused on:
-
-- understanding and documenting the existing system
-- improving data quality during counter reset events
-- adding invalid value filtering
-- stabilizing RS-485 communication
-- improving system reliability
-- preparing the system for ERP / 1C integration
+- implement a verified common RS-485 reference point
+- add relay-based RS-485 bus switching for 3-layer / 5-layer production modes
+- expand SQL and WinCC documentation
+- improve external ERP / 1C data integration
 
 ---
 
-## Notes
+## Engineering Value
 
-This repository contains an anonymized version of the original system.
+This project demonstrates practical industrial automation skills:
 
-Sensitive production details, addresses and identifiers have been removed.
+- troubleshooting real production systems
+- working with incomplete documentation
+- PLC programming and debugging
+- industrial communication diagnostics
+- RS-485 / Modbus RTU reliability improvement
+- SCADA and database-oriented system thinking
+- safe anonymized technical documentation
+
+---
+
+## Notice
+
+This repository does not contain the full industrial project.
+
+Sensitive production details, real addresses, credentials, internal identifiers and plant-specific information have been removed or anonymized.
+
+The goal of this repository is to demonstrate engineering approach, system understanding and modernization work.
