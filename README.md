@@ -78,3 +78,7 @@ Further enhancements are planned:
 ## Author
 
 Industrial Automation Engineer focused on PLC systems, industrial communication and system reliability.
+
+## System Architecture
+
+![System Architecture](diagrams/system-architecture.png)
