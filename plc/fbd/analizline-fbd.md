@@ -66,3 +66,10 @@ Modbus error aggregation
 Cut point processing
         ↓
 Prepared data for HMI / WinCC / SQL
+```
+
+Notes
+
+The original logic is implemented in FBD inside EcoStruxure Machine Expert.
+
+This document provides an anonymized explanation of the structure instead of exporting the full industrial project.
