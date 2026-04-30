@@ -1,63 +1,49 @@
-# Future WinCC / SQL Improvements
+# Future WinCC Improvements
 
 ## Overview
 
-Several improvements are planned for the WinCC / SQL and reporting layer.
+Several improvements are planned for the WinCC layer.
 
-The main goal is to make reports more reliable, more useful and better connected to ERP / 1C.
+The main goal is to make the SCADA project easier to maintain, easier to diagnose and better synchronized with PLC and SQL logic.
 
 ---
 
-## Reporting Improvements
+## Planned Improvements
+
+- document important WinCC tags
+- document key VBS scripts
+- document WinCC Actions and their triggers
+- improve naming of legacy scripts where possible
+- improve diagnostics for PLC / server communication
+- add screenshots of important WinCC project areas
+- document how WinCC transfers prepared PLC values into SQL Server
+
+---
+
+## Script Improvements
 
 Planned work:
 
-- redesign daily production reports
-- redesign daily roll meter reports
-- redesign monthly reports
-- improve Excel formatting
-- improve report structure by line and shift
-- improve error handling in report scripts
+- separate data synchronization logic from report generation logic
+- document script dependencies
+- reduce unclear legacy logic
+- improve error handling in VBS scripts
+- make future script changes safer
 
 ---
 
-## Meter Loss Analysis
-
-Planned improvement for roll meter reports:
-
-- add total output meter value
-- compare roll input meters with output meters
-- calculate production losses
-- make roll consumption analysis more useful for production control
-
----
-
-## ERP / 1C Integration
-
-Current ERP / 1C integration exists, but many functions are incomplete or unreliable.
+## Tag Management Improvements
 
 Planned work:
 
-- improve synchronization logic
-- use record ID to track processed rows
-- prevent duplicate data transfer
-- coordinate changes with 1C developer
-- prepare cleaner SQL queries for external systems
-
----
-
-## Database Improvements
-
-Planned work:
-
-- improve table structure where possible
-- document important tables
-- add clear record identifiers
-- improve query reliability
-- reduce dependency on unclear legacy logic
+- group important tags by function
+- document PLC data tags
+- document internal WinCC tags
+- document trigger flags for SQL transfer
+- document connection status tags
 
 ---
 
 ## Engineering Goal
 
-The goal is to make the upper-level system easier to maintain and more reliable for reporting, production analysis and ERP integration.
+The goal is to make the WinCC layer easier to understand, maintain and safely modify.
