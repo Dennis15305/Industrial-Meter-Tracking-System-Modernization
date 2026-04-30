@@ -127,7 +127,7 @@ Documented logic includes:
     .
     ├── diagrams/       # System architecture and RS-485 improvement diagrams
     ├── docs/           # Project documentation and engineering analysis
-    ├── hmi/            # HMI-related notes and future documentation
+    ├── hmi/            # HMI operator interface documentation
     ├── photos/         # Project-related photos and screenshots
     ├── plc/            # PLC logic examples and documentation
     ├── sql/            # SQL Server structure, reports and ERP / 1C integration
