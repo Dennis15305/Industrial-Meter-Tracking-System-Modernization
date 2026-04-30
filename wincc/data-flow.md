@@ -2,9 +2,9 @@
 
 ## Overview
 
-WinCC acts as the upper-level SCADA layer between PLC data and SQL / reporting systems.
+WinCC acts as the SCADA layer between PLC data and the SQL / reporting layer.
 
-The main purpose of this layer is to read production values from PLC tags, display them on SCADA screens and store selected values in SQL Server for reporting.
+Its main role is to read production values from PLC tags, display them on runtime screens and trigger scripts that transfer selected data to SQL Server.
 
 ---
 
@@ -14,13 +14,13 @@ The main purpose of this layer is to read production values from PLC tags, displ
         ↓
     WinCC Tag Management
         ↓
-    WinCC Runtime / VBS Scripts
+    WinCC Runtime Screens
         ↓
-    SQL Server Database
+    Global Script VBS / Actions
         ↓
-    Excel Reports
+    SQL Server
         ↓
-    Email / ERP / 1C
+    Excel Reports / Email / ERP
 
 ---
 
@@ -28,7 +28,7 @@ The main purpose of this layer is to read production values from PLC tags, displ
 
 Production values are read from PLC through WinCC tags.
 
-The system uses tag connections for:
+The tag layer includes:
 
 - production counters
 - line status values
@@ -36,40 +36,33 @@ The system uses tag connections for:
 - shift data
 - server communication status
 - trigger flags for data transfer
+- diagnostic values
+
+---
+
+## WinCC Runtime
+
+WinCC Runtime displays production statistics for several lines.
+
+Typical displayed data:
+
+- current production values
+- current shift values
+- input and output counters
+- reject counters
+- meter values
+- square meter values
+- line status and communication states
 
 ---
 
 ## WinCC to SQL
 
-WinCC VBS scripts process tag values and write selected data into SQL Server.
+WinCC scripts process runtime tag values and write selected values into SQL Server.
 
-The scripts use SQL connection logic and insert production values into database tables.
+SQL structure and reporting logic are documented separately:
 
-Typical stored data includes:
-
-- date and time
-- line name
-- order number
-- shift number
-- input counter
-- output counter
-- reject counter
-- status values
-- roll meter values
-
----
-
-## SQL to Reports
-
-Separate reporting scripts read data from SQL Server.
-
-Reports are generated in Excel format and sent by email.
-
-Current report types:
-
-- daily production reports
-- daily roll meter reports
-- monthly production reports
+[SQL / Reporting Layer](../sql/README.md)
 
 ---
 
@@ -77,4 +70,4 @@ Current report types:
 
 Understanding this data flow was important because PLC logic changes directly affected WinCC scripts and SQL reports.
 
-When PLC counter reset logic was improved, the WinCC reporting logic also had to be updated to correctly process the new clean values.
+When PLC counter reset logic was improved, the WinCC layer also had to be adjusted to correctly process the new clean values.
