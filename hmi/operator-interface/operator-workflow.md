@@ -16,40 +16,62 @@ The HMI receives these values from the PLC and displays them on the main screen.
 
 ## Stop Event Workflow
 
-When the line stops or the operator presses the STOP button:
+When the operator presses the STOP button:
 
-1. The HMI allows the operator to select a stop reason.
-2. The selected reason is written to the PLC command word.
-3. The PLC decodes the command bit.
-4. The PLC updates the line status word.
-5. The status change is stored in the history structure.
-6. The history record is marked as not transferred.
-7. The record is later transferred to SCADA / SQL.
+1. The HMI opens stop reason selection.
+2. The operator selects a stop reason.
+3. Depending on the selected reason, the HMI executes a macro or writes directly to a PLC variable.
+4. The PLC receives the command.
+5. The PLC updates the line status word.
+6. The status change is saved into production history.
+7. The history record is later prepared for WinCC / SQL transfer.
 
 ---
 
-## Example Stop Reasons
+## Stop Reasons
 
-- Alarm
-- Lunch
-- Planned maintenance
-- No production load
-- Web break
-- Technology reason
+The HMI supports several stop reasons:
+
+- alarm
+- lunch
+- planned maintenance
+- no production load
+- web break
+- technology reason
+- setup / reconfiguration
+- unknown stop reason
+
+Unknown stop reason is used when the line stops but the operator does not select a reason.
+
+Setup / reconfiguration can be linked to production order changes and may be assigned from the ERP / 1C side.
 
 ---
 
 ## Maintenance / Authorization Workflow
 
-Some actions require user number input.
+Some actions require user authorization.
 
 Basic workflow:
 
-1. Operator selects a maintenance-related action.
-2. HMI opens authorization popup.
+1. Operator opens a protected action or settings screen.
+2. HMI displays authorization popup.
 3. User enters user number.
-4. HMI sends the number to PLC.
-5. PLC stores user number in the history record.
+4. HMI confirms or rejects access according to its internal security settings.
+5. The action is executed if access is allowed.
+
+The exact connection between HMI user number and database history records requires further investigation.
+
+---
+
+## Settings Workflow
+
+The HMI provides access to production settings.
+
+One important setting is cardboard width.
+
+This value is used to calculate square meters from linear meters.
+
+Settings access is protected by HMI user authorization.
 
 ---
 
@@ -57,7 +79,7 @@ Basic workflow:
 
 The HMI itself does not store production history.
 
-It sends operator commands to the PLC.
+It sends operator commands and settings to the PLC.
 
 The PLC is responsible for:
 
@@ -65,4 +87,4 @@ The PLC is responsible for:
 - counter logic
 - event history
 - transfer flags
-- data preparation for SCADA / SQL
+- data preparation for WinCC / SQL
