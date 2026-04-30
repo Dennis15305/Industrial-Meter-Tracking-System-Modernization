@@ -7,9 +7,10 @@ The HMI consists of several operator screens and popups.
 The main screens are used for:
 
 - monitoring production state
-- viewing counters
+- viewing current order and shift counters
 - selecting stop reasons
-- entering user number for maintenance actions
+- entering user number for protected actions
+- accessing settings
 
 ---
 
@@ -21,24 +22,40 @@ Main elements:
 
 - current shift
 - PLC date and time
-- line name / production line identifier
+- line identifier
 - current order
 - current order meters
 - current order square meters
-- total production for the shift
-- production speed
+- total meters for the shift
+- total square meters for the shift
+- real-time production speed
 - line status indicators
 - STOP button
 - stop reason buttons
-- communication status messages
+- equipment communication warning
+- server communication warning
+
+---
+
+## Line Status Indicators
+
+The main screen contains colored indicators that represent the current line mode or state.
+
+The exact meaning of each indicator still needs to be verified in the HMI project and PLC status logic.
+
+Possible meanings:
+
+- line stopped
+- line in setup / waiting state
+- line running
 
 ---
 
 ## Stop Reason Selection
 
-When the operator stops the line or needs to classify downtime, the HMI provides stop reason buttons.
+When the operator presses the STOP button, the HMI opens a stop reason selection area or popup.
 
-Typical stop reasons:
+Stop reasons include:
 
 - alarm
 - lunch
@@ -46,10 +63,14 @@ Typical stop reasons:
 - no production load
 - web break
 - technology reason
+- setup / reconfiguration
+- unknown stop reason
 
-Each button sends a command to the PLC through the HMI command word.
+Some stop reasons are selected directly by the operator.
 
-The PLC then updates the line status and stores the event in the production history.
+Setup / reconfiguration may come from the production order system instead of being selected manually on the HMI.
+
+Unknown stop reason is used when the line stops but the operator does not classify the reason.
 
 ---
 
@@ -60,17 +81,19 @@ The counter screen displays production counters for the current order and curren
 Typical displayed values:
 
 - current order number
-- input counter
-- output counter
-- total counter for the shift
+- current order meters
+- current order square meters
+- total meters for the shift
+- total square meters for the shift
+- line speed
 
-This screen is mainly used for operator monitoring and diagnostics.
+Roll-specific values are processed in the PLC, while the HMI mainly displays general order and shift values.
 
 ---
 
 ## Authorization Popup
 
-Some actions require user number input.
+Some actions require user authorization.
 
 The authorization popup contains:
 
@@ -78,15 +101,29 @@ The authorization popup contains:
 - confirm button
 - cancel button
 
-This is used to associate specific actions with a responsible user or maintenance role.
+This is used for protected actions such as settings access or maintenance-related actions.
+
+The exact mapping between HMI user number and PLC / database fields requires further investigation.
+
+---
+
+## Settings Screen
+
+The HMI contains protected settings.
+
+One important setting is cardboard width, which is used to calculate square meters from linear meters.
+
+Access to settings requires user authorization.
 
 ---
 
 ## Communication Status
 
-The HMI displays communication-related warnings such as:
+The HMI displays communication-related warnings:
 
 - connection loss with equipment
 - connection loss with server
 
-These messages help the operator identify whether the problem is related to field devices, PLC communication or upper-level systems.
+Equipment communication warning is related to communication with the PLC and counters.
+
+Server communication warning is related to communication with the WinCC server or upper-level system.
