@@ -130,8 +130,8 @@ Documented logic includes:
     ├── hmi/            # HMI-related notes and future documentation
     ├── photos/         # Project-related photos and screenshots
     ├── plc/            # PLC logic examples and documentation
-    ├── sql/            # SQL-related examples and future documentation
-    ├── wincc/          # WinCC-related notes and future documentation
+    ├── sql/            # SQL Server structure, reports and ERP / 1C integration
+    ├── wincc/          # WinCC SCADA screens, tags, VBS scripts and actions
     ├── NOTICE.md       # Repository confidentiality notice
     └── README.md
 
@@ -145,7 +145,6 @@ Documented logic includes:
 - [Modernization Plan](docs/modernization-plan.md)
 - [Engineering Lessons](docs/engineering-lessons.md)
 - [PLC Logic Overview](plc/README.md)
-- [HMI Operator Interface](hmi/README.md)
 - [HMI Operator Interface](hmi/README.md)
 - [WinCC / SCADA Layer](wincc/README.md)
 - [SQL / Reporting Layer](sql/README.md)
