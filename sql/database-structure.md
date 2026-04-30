@@ -4,80 +4,61 @@
 
 SQL Server is used as the production data storage layer for the WinCC system.
 
-The database stores production counters, meter values, line states and data used for reports.
+The database stores production counters, roll meter values, line states and data used for reports.
+
+---
+
+## Main Database
+
+The main database is:
+
+    WinCC_SQL
+
+---
+
+## Main Table Groups
+
+The database contains tables related to:
+
+- production counters
+- roll meter values
+- line events
+- email reports
+- production orders
+- efficiency data
+- synchronization logic
 
 ---
 
 ## Important Tables
 
-### Pogon
+Important tables include:
 
-Stores roll meter values.
-
-This table is used for daily roll meter reports.
-
-It contains meter data from roll counters and is used to generate Excel reports by roll number and time range.
-
----
-
-### PIE_Send_EMail
-
-Stores line events, status values and production counters used for email reports.
-
-Typical data includes:
-
-- line name
-- input counter
-- output counter
-- reject counter
-- shift number
-- status
-- date and time
-- order number
-- user number
-- setup type
-
----
-
-### OptiSoftData
-
-Stores production order and efficiency-related data.
-
-Typical data includes:
-
-- line
-- order number
-- technical card
-- nominal efficiency
-- start date
-- setup / reconfiguration time
-
-Some fields exist but are not fully implemented in the current system.
-
----
-
-### Production
-
-Stores production-related data used by the WinCC / reporting layer.
-
-The exact role of this table requires further investigation.
-
----
-
-## Empty / Unclear Tables
-
-Some tables exist in the database but are currently empty or not fully understood.
-
-Example:
-
+- Pogon
+- PIE_Send_EMail
+- OptiSoftData
+- Production
+- Send_Email
 - SyncStatus
 
-This table may be related to synchronization logic, but its current role is unclear.
+Detailed table descriptions:
+
+[Important Tables](important-tables.md)
+
+---
+
+## Connection to WinCC
+
+WinCC VBS scripts write production data into SQL Server.
+
+The WinCC layer is documented separately:
+
+[WinCC / SCADA Layer](../wincc/README.md)
 
 ---
 
 ## Engineering Note
 
-Database structure is tightly connected to PLC and WinCC script logic.
+SQL structure is tightly connected to PLC and WinCC logic.
 
-Changes in PLC values or WinCC transfer logic can require updates in SQL queries and report generation scripts.
+Changes in PLC values or WinCC transfer scripts can require updates in SQL queries and report generation logic.
