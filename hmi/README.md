@@ -1,13 +1,12 @@
-
 # HMI Overview
 
 ## Overview
 
 This folder documents the HMI operator interface used in the industrial meter tracking system.
 
-The HMI provides the operator with access to production status, counters, alarms, stop reasons and basic line control commands.
+The HMI is based on a Weintek MT8071iE panel and is edited using EasyBuilder Pro / EBPro V6.09.02.651.
 
-The interface is part of the operator-to-PLC command layer. Operator actions are converted into PLC command words, while PLC status words and counters are displayed back on the HMI.
+The HMI communicates with the PLC over Ethernet TCP/IP and provides the operator with access to production status, counters, stop reasons, alarms, communication warnings and basic line control commands.
 
 ---
 
@@ -15,7 +14,7 @@ The interface is part of the operator-to-PLC command layer. Operator actions are
 
 The original HMI project already existed before my work.
 
-My role was focused on analyzing how the HMI interacts with PLC logic, operator commands, status words, counters and production history.
+My role was focused on analyzing how the HMI interacts with PLC logic, operator commands, status words, counters, user authorization and production history.
 
 This documentation explains the HMI role in the full system architecture without exposing the complete industrial project.
 
@@ -29,11 +28,20 @@ The HMI is used to:
 - display current shift and PLC time
 - show current order counters
 - show total production counters for the shift
-- display line speed
-- show connection and alarm states
+- display real-time line speed
+- show equipment and server communication status
 - allow the operator to select stop reasons
 - send operator commands to the PLC
-- provide basic authorization for maintenance-related actions
+- provide user authorization for protected actions
+- provide access to settings, including production width for square meter calculation
+
+---
+
+## Communication
+
+The HMI is connected to the industrial network and communicates with the PLC over Ethernet TCP/IP.
+
+It displays PLC data and sends operator commands back to the PLC using tags, direct variable writes and macros.
 
 ---
 
@@ -43,6 +51,7 @@ The HMI is used to:
 - [Screen Structure](operator-interface/screen-structure.md)
 - [Operator Workflow](operator-interface/operator-workflow.md)
 - [PLC Tag Interaction](operator-interface/plc-tag-interaction.md)
+- [Future Improvements](operator-interface/future-improvements.md)
 - [Contribution Scope](operator-interface/contribution-scope.md)
 
 ---
