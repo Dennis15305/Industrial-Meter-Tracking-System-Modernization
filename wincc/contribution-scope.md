@@ -2,15 +2,15 @@
 
 ## Original State
 
-The WinCC / SQL system already existed before my work.
+The WinCC system already existed before my work.
 
 It included:
 
 - WinCC visualization screens
-- tag configuration
+- Tag Management
 - Global Script VBS modules
 - WinCC Actions
-- SQL Server database
+- SQL Server interaction
 - Excel report generation
 - email reporting
 
@@ -24,9 +24,9 @@ My work focused on:
 
 - understanding the existing WinCC project
 - analyzing the tag structure
-- studying VBS scripts
-- understanding SQL data storage
-- modifying report logic
+- studying Global Script VBS modules
+- understanding how PLC values are transferred to SQL
+- modifying parts of the reporting logic
 - improving compatibility between PLC logic and reports
 - preparing future improvements for reports and ERP / 1C integration
 
@@ -34,13 +34,13 @@ My work focused on:
 
 ## Implemented Changes
 
-I modified the logic related to roll meter data.
+I modified logic related to roll meter data processing.
 
 After improving PLC counter reset handling, the PLC started preparing one clean value for each roll reset event.
 
-WinCC scripts were updated so they no longer processed three mixed variables, but instead used the prepared value.
+WinCC scripts were adjusted so they no longer relied on the old noisy data behavior.
 
-The roll meter report was also updated to read valid values from the Pogon table for the full production day.
+This made the WinCC / SQL reporting layer compatible with the improved PLC data logic.
 
 ---
 
@@ -49,10 +49,10 @@ The roll meter report was also updated to read valid values from the Pogon table
 This work demonstrates:
 
 - WinCC project analysis
-- SQL Server data understanding
-- VBS script modification
-- industrial reporting logic
-- PLC to SCADA to SQL data flow understanding
+- VBS script understanding
+- PLC-to-SCADA data flow analysis
+- SCADA-to-SQL transfer logic
+- industrial reporting workflow understanding
 - working with existing undocumented systems
 
 ---
@@ -61,4 +61,4 @@ This work demonstrates:
 
 At the beginning, I had very little experience with WinCC.
 
-Over time, I studied the project structure, tag flow, SQL tables and reporting scripts until I could safely modify and improve parts of the system.
+Over time, I studied the project structure, tag flow, scripts and database interaction until I could safely modify and improve parts of the system.
