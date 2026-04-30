@@ -145,6 +145,7 @@ Documented logic includes:
 - [Modernization Plan](docs/modernization-plan.md)
 - [Engineering Lessons](docs/engineering-lessons.md)
 - [PLC Logic Overview](plc/README.md)
+- [HMI Operator Interface](hmi/README.md)
 
 ---
 
