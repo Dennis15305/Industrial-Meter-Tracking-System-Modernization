@@ -2,7 +2,7 @@
 
 ## Overview
 
-WinCC Tag Management is used to connect PLC values, internal runtime tags and script logic.
+WinCC Tag Management is used to connect PLC values, internal runtime tags, visualization screens and script logic.
 
 Tags are the main communication layer between:
 
@@ -34,7 +34,7 @@ Tags are used for:
 - detecting server / PLC communication state
 - reading prepared PLC buffers
 - triggering script actions
-- transferring data into SQL Server
+- transferring selected data into SQL Server
 - supporting report generation
 
 ---
@@ -43,9 +43,9 @@ Tags are used for:
 
 WinCC reads PLC data using configured communication connections.
 
-The project contains tag connections to PLC and runtime values.
+The project contains tag connections to the PLC and runtime values.
 
-Some OPC-related components exist in the project, but their exact purpose requires further investigation.
+Some OPC-related components exist in the project, but their exact role requires further investigation.
 
 ---
 
@@ -53,10 +53,10 @@ Some OPC-related components exist in the project, but their exact purpose requir
 
 Tag structure is critical in this system.
 
-Any change in PLC variable layout, WinCC tags or script names can affect:
+Any change in PLC variables, WinCC tag names or script logic can affect:
 
 - visualization
 - SQL logging
-- reports
+- Excel reports
 - email output
 - ERP / 1C integration
