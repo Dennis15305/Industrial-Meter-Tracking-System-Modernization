@@ -2,7 +2,7 @@
 
 ## Overview
 
-The HMI exchanges data with the PLC using command words, status words, counters and display variables.
+The HMI exchanges data with the PLC using tags, command variables, status variables and macros.
 
 This document describes the logical interaction between HMI and PLC.
 
@@ -10,33 +10,42 @@ Real memory addresses are not included.
 
 ---
 
-## Command Word
+## Communication
 
-Operator buttons are grouped into a command word.
+The HMI communicates with the PLC over Ethernet TCP/IP.
 
-Each bit represents a specific operator command.
-
-Example commands:
-
-- Stop
-- Setup / new order
-- No production load
-- Lunch
-- Planned maintenance
-- Fault clearing
-- Alarm
-- Technology reason
-- Web break
-
-The PLC decodes this command word and updates line status accordingly.
+The HMI is also connected to the common industrial network and can be accessed by IP address.
 
 ---
 
-## Status Word
+## Operator Commands
 
-The PLC sends current line state back to the HMI through a status word.
+Operator actions are sent to the PLC in two main ways:
 
-The HMI uses this status word to display:
+- direct variable write
+- HMI macro execution
+
+Some buttons directly modify PLC variables.
+
+Other buttons execute macros, which then write commands or values to the PLC.
+
+---
+
+## Stop Button
+
+The STOP button does not only stop the line.
+
+It opens the stop reason selection workflow.
+
+After the operator selects a reason, the HMI sends the corresponding command to the PLC.
+
+---
+
+## Status Display
+
+The PLC sends current line state back to the HMI.
+
+The HMI uses this data to display:
 
 - running state
 - stop state
@@ -45,42 +54,46 @@ The HMI uses this status word to display:
 - maintenance state
 - technology stop state
 - web break state
+- communication warnings
 
 ---
 
 ## Counters
 
-The HMI displays production counters received from PLC.
+The HMI displays production counters received from the PLC.
 
-Typical counters:
+Typical displayed values:
 
-- current order counter
-- input counter
-- output counter
-- shift total counter
-- meter counter
-- square meter counter
+- current order meters
+- current order square meters
+- shift meters
+- shift square meters
+- real-time line speed
 
----
-
-## User Number
-
-For some actions, the HMI sends a user number to the PLC.
-
-This value can be stored in the history record to identify who performed or confirmed the action.
+Roll-specific meter values are processed in the PLC and can be used for deeper diagnostics or future HMI improvements.
 
 ---
 
-## Communication Status
+## User Authorization
 
-The HMI displays communication status flags from the PLC.
+The HMI has its own user security system.
 
-These may include:
+User authorization is used for protected actions such as settings access.
 
-- equipment communication error
-- server communication error
-- PLC status
-- Modbus device error state
+The exact transfer of user number into PLC / SQL history requires further investigation.
+
+---
+
+## Communication Warnings
+
+The HMI displays warnings related to:
+
+- equipment communication loss
+- server communication loss
+
+Equipment communication loss is related to the PLC and counter communication chain.
+
+Server communication loss is related to the WinCC server or upper-level system.
 
 ---
 
@@ -88,4 +101,4 @@ These may include:
 
 The HMI is tightly connected to PLC state logic.
 
-Any change in HMI buttons, command words or status words must be synchronized with the PLC program.
+Any change in HMI buttons, macros, command variables or status variables must be synchronized with the PLC program.
