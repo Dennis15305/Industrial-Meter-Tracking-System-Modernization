@@ -1,20 +1,20 @@
-# WinCC / SQL Layer Overview
+# WinCC / SCADA Layer
 
 ## Overview
 
-This folder documents the WinCC / SQL layer of the industrial meter tracking system.
+This folder documents the WinCC layer of the industrial meter tracking system.
 
-WinCC is used as the upper-level SCADA system for production visualization, tag processing, SQL data storage and reporting.
+WinCC is used as the upper-level SCADA system for production visualization, tag processing, VBS scripting and interaction with the SQL database layer.
 
-The system is based on WinCC V7.5.0.0 and Microsoft SQL Server.
+The system is based on WinCC V7.5.0.0.
 
 ---
 
 ## Important Note
 
-The original WinCC / SQL system already existed before my work.
+The original WinCC project already existed before my work.
 
-My role was focused on analyzing, maintaining and improving parts of the existing system, especially database logic, VBS scripts and production reporting.
+My role was focused on analyzing, maintaining and improving parts of the existing system, especially tag flow, VBS scripts and interaction with SQL-based reporting.
 
 This documentation explains the WinCC role in the full PLC / SCADA / SQL architecture without exposing the complete industrial project.
 
@@ -24,36 +24,41 @@ This documentation explains the WinCC role in the full PLC / SCADA / SQL archite
 
 WinCC is used to:
 
-- display production statistics for multiple lines
+- display production statistics for multiple production lines
 - read production values from PLC tags
-- process tag values using VBS scripts
-- store production data in SQL Server
-- generate Excel reports
-- send reports by email
-- support future ERP / 1C integration
+- show current counters, shift values and line status
+- process runtime values using Global Script VBS
+- execute WinCC Actions
+- transfer selected values to SQL Server
+- support Excel and email reporting through scripts
 
 ---
 
-## Main Components
+## What Belongs to This Folder
 
-- WinCC Runtime visualization screens
+This folder focuses on the SCADA/application side:
+
+- WinCC Runtime screens
 - Tag Management
 - Global Script VBS modules
 - WinCC Actions
-- SQL Server database
-- Excel report generation scripts
-- Email reporting logic
+- PLC-to-WinCC data flow
+- WinCC-to-SQL transfer logic at a high level
+
+Detailed SQL tables, reports and database logic are documented separately:
+
+[SQL / Reporting Layer](../sql/README.md)
 
 ---
 
 ## Documentation
 
-- [Data Flow](data-flow.md)
+- [WinCC Data Flow](data-flow.md)
 - [Tag Management](tag-management.md)
-- [Database Structure](database-structure.md)
-- [Reporting System](reporting-system.md)
+- [VBS Scripts](vbs-scripts.md)
+- [WinCC Actions](actions.md)
 - [Contribution Scope](contribution-scope.md)
-- [Future Improvements](future-improvements.md)
+- [Screenshots](screenshots/README.md)
 
 ---
 
