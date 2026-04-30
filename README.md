@@ -146,6 +146,9 @@ Documented logic includes:
 - [Engineering Lessons](docs/engineering-lessons.md)
 - [PLC Logic Overview](plc/README.md)
 - [HMI Operator Interface](hmi/README.md)
+- [HMI Operator Interface](hmi/README.md)
+- [WinCC / SCADA Layer](wincc/README.md)
+- [SQL / Reporting Layer](sql/README.md)
 
 ---
 
