@@ -53,6 +53,7 @@ It displays PLC data and sends operator commands back to the PLC using tags, dir
 - [PLC Tag Interaction](operator-interface/plc-tag-interaction.md)
 - [Future Improvements](operator-interface/future-improvements.md)
 - [Contribution Scope](operator-interface/contribution-scope.md)
+- [HMI Operator Interface](hmi/README.md)
 
 ---
 
