@@ -13,7 +13,7 @@ Screenshots may include:
 
 ## Files
 
-- sql-database-tables.png — SQL Server table list
+- sql-database-tables.png-1, sql-database-tables-2.png — SQL Server table list
 
 ---
 
