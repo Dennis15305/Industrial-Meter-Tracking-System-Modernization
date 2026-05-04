@@ -15,8 +15,7 @@ Screenshots may include:
 
 - wincc-statistics-screen.png — Runtime screen with production statistics
 - tag-management.png — WinCC tag structure
-- global-script-vbs.png — Global Script VBS module example
-- wincc-actions.png — WinCC Actions and runtime triggers
+- global-script-vbs.png — Global Script VBS module and Actions
 
 ---
 
